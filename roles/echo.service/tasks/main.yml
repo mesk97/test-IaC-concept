@@ -1,0 +1,25 @@
+- name: Install dependencies
+  yum: name=nmap-ncat state=latest
+
+- name: Render {{ simple_echo.name }} service config
+  template:
+    src: "simpleecho.service.j2"
+    dest: "{{ systemd_path }}/{{ simple_echo.name }}"
+    mode: 0644
+    owner: root
+    group: root
+  notify:
+    - reload systemd
+
+- meta: flush_handlers
+
+- name: Start and enable {{ simple_echo.name }} service
+  service:
+    name: "{{ simple_echo.name }}"
+    state: started
+    enabled: yes
+
+- name: Waiting for {{ simple_echo.name }} to become available
+  wait_for:
+    host: "{{ ansible_ssh_host }}"
+    port: "{{ simple_echo.port }}"

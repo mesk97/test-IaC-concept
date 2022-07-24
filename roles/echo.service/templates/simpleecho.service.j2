@@ -1,0 +1,8 @@
+[Unit]
+Description=Simple Echo Service
+	
+[Service]
+ExecStart=/bin/bash -c "ncat -l {{simple_echo.port}} -k -c 'xargs -n1 echo reply\#'"
+	
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,4 @@
+- hosts: echo_service
+  become: yes
+  roles:
+    - echo.service

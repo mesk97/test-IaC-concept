@@ -1,0 +1,2 @@
+[echo_service]
+echovm ansible_ssh_host=34.89.149.241
