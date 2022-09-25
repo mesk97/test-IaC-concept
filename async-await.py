@@ -18,7 +18,9 @@ async def hello(word):
 loop = get_event_loop()
 
 loop.run_until_complete(
-    gather(hello("A"), hello("BB"), hello("CCC"))
+    
+        gather(hello("A"), hello("BB"), hello("CCC")) # register in eventloop
+
 )
 
 loop.close()

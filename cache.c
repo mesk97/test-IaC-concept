@@ -2,8 +2,8 @@
 #include "stdio.h"
 #include "time.h"
 
-#define THREAD_COUNT 13
-#define ITERATION_LIMIT 100000000LL
+#define THREAD_COUNT 5
+#define ITERATION_LIMIT 500000000LL
 
 long long count = 0;
 

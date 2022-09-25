@@ -5,7 +5,6 @@
 #define THREAD_COUNT 13
 #define ITERATION_LIMIT 10000000LL
 
-// long long count = 0;
 
 static void *hello(void* d) {
     long long count = 0;
