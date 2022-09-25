@@ -1,6 +1,5 @@
-obj-m += mymodule.o
-
-hello-objs := mymodule.c
+#obj-m += my_module.o
+obj-m += real_module.o
 
 all:
 	make -C /lib/modules/$(shell uname -r)/build/ M=$(PWD) modules

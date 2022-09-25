@@ -4,13 +4,17 @@
 #include <linux/kernel.h>
 
 MODULE_LICENSE("GPLv3");
+MODULE_AUTHOR("Konstantin Pakulin");
+MODULE_DESCRIPTION("Simplest Linux module");
+MODULE_VERSION("0.01");
+
 
 int init_module(void){
-	    printk("<1> Hello,World\n");
-	        return 0;
+	printk("<1> Hello,World\n");
+        return 0;
 }
 
 void cleanup_module(void){
-	    printk("<1> Goodbye.\n");
+	printk("<1> Goodbye.\n");
 }
 
