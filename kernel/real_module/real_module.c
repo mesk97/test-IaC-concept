@@ -9,7 +9,7 @@ MODULE_AUTHOR("mesk");
 MODULE_DESCRIPTION("real module");
 MODULE_VERSION("0.01");
 
-#define DEVICE_NAME "real_module"
+#define DEVICE_NAME "my_real_device"
 #define EXAMPLE_MSG "Super important real_module message!\n"
 #define MSG_BUFFER_LEN 37
 
@@ -18,6 +18,7 @@ static int device_open(struct inode *, struct file *);
 static int device_release(struct inode *, struct file *);
 static ssize_t device_read(struct file *, char *, size_t, loff_t *);
 static ssize_t device_write(struct file *, const char *, size_t, loff_t *);
+
 static int major_num;
 static int device_open_count = 0;
 static char msg_buffer[MSG_BUFFER_LEN];
@@ -80,36 +81,39 @@ static int device_open(struct inode *inode, struct file *file) {
 	  }
 	  
 	 device_open_count++;
-	   try_module_get(THIS_MODULE);
-	    return 0;
+	 try_module_get(THIS_MODULE);
+	 return 0;
 }
 /* Called when a process closes our device */
 static int device_release(struct inode *inode, struct file *file) {
 	 /* Decrement the open counter and usage count. Without this, the module would not unload. */
 	 device_open_count--;
-	  module_put(THIS_MODULE);
-	   return 0;
+	 module_put(THIS_MODULE);
+	 return 0;
 }
 static int __init lkm_example_init(void) {
 	 /* Fill buffer with our message */
 	 strncpy(msg_buffer, EXAMPLE_MSG, MSG_BUFFER_LEN);
-	  /* Set the msg_ptr to the buffer */
-	  msg_ptr = msg_buffer;
-	   /* Try to register character device */
-	   major_num = register_chrdev(0, "lkm_example", &file_ops);
-	    if (major_num < 0) {
-		     printk(KERN_ALERT "Could not register device: %d\n", major_num);
-		      return major_num;
-		       } else {
-			        printk(KERN_INFO "real_module loaded with device major number %d\n", major_num);
-				 return 0;
-				  }
+	 
+	 /* Set the msg_ptr to the buffer */
+	 msg_ptr = msg_buffer;
+	 
+	 /* Try to register character device */
+	 major_num = register_chrdev(0, DEVICE_NAME, &file_ops);
+	 if (major_num < 0) {
+		 printk(KERN_ALERT "Could not register device: %d\n", major_num);
+		 return major_num;
+	 } else {
+		 printk(KERN_INFO "devide %s loaded with device major number %d\n", DEVICE_NAME, major_num);
+		 return 0;
+	 }
 }
 static void __exit lkm_example_exit(void) {
 	 /* Remember — we have to clean up after ourselves. Unregister the character device. */
 	 unregister_chrdev(major_num, DEVICE_NAME);
-	  printk(KERN_INFO "Goodbye, real_module!\n");
+	 printk(KERN_INFO "Goodbye, %s!\n", DEVICE_NAME);
 }
+
 /* Register module functions */
 module_init(lkm_example_init);
 module_exit(lkm_example_exit);

@@ -1,4 +1,3 @@
-#obj-m += my_module.o
 obj-m += real_module.o
 
 all:
