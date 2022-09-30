@@ -5,7 +5,7 @@
 #include <asm/uaccess.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("mesk");
+MODULE_AUTHOR("noname");  // Idea by Ruslan Kim
 MODULE_DESCRIPTION("real module");
 MODULE_VERSION("0.01");
 
@@ -104,7 +104,7 @@ static int __init lkm_example_init(void) {
 		 printk(KERN_ALERT "Could not register device: %d\n", major_num);
 		 return major_num;
 	 } else {
-		 printk(KERN_INFO "devide %s loaded with device major number %d\n", DEVICE_NAME, major_num);
+		 printk(KERN_INFO "Device %s loaded with device major number %d\n", DEVICE_NAME, major_num);
 		 return 0;
 	 }
 }

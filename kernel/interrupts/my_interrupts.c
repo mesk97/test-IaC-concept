@@ -12,9 +12,10 @@
 #include <linux/workqueue.h>
 #include <linux/interrupt.h>
 #include <asm/io.h>
+#include <linux/delay.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Hai Dang Hoang");
+MODULE_AUTHOR("Hai Dang Hoang"); // + Ideas by Ruslan Kim
 
 /*  ISR : interrupt handler
  *  *   This function services keyboard interrupts. It reads the relevant
@@ -38,15 +39,14 @@ irqreturn_t irq_handler(int irq, void *dev_id)
 	status = inb(0x64);
 	scancode = inb(0x60);
 
-	printk (KERN_INFO "! You pressed button ...\n");
-
 	switch (scancode)
 	{
 		case 0x01:  printk (KERN_INFO "! You pressed Esc ...\n");
 			    break;
 		case 0x3B:  printk (KERN_INFO "! You pressed F1 ...\n");
 			    break;
-		case 0x3C:  printk (KERN_INFO "! You pressed F2 ...\n");
+		case 0x3C:  printk (KERN_INFO "! You pressed F2 ... are you ready for timeout ?\n");
+			    mdelay(5000);
 			    break;
 		default:
 			    break;
