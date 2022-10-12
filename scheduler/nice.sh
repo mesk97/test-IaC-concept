@@ -6,4 +6,4 @@ nice -n 10 ./thread >> /dev/null && echo 10 &
 nice -n 1 ./thread >> /dev/null && echo 1 &
 nice -n 0 ./thread >> /dev/null && echo 0 &
 
-sleep 10
+sleep 20

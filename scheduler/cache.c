@@ -5,9 +5,10 @@
 #define THREAD_COUNT 5
 #define ITERATION_LIMIT 500000000LL
 
-long long count = 0;
+//long long count = 0;
 
 static void *hello(void* d) {
+    long long count = 0;
     long tid = (long) d;
 
     while(count < ITERATION_LIMIT) {
