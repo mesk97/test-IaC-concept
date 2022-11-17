@@ -2,10 +2,14 @@
 
 import socket
 import select
+import sys
+
+HOST = str(sys.argv[1])
+PORT = int(sys.argv[2])
 
 l = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-l.bind(("0.0.0.0", 9090))
+l.bind((HOST, PORT))
 
 l.listen()
 
