@@ -3,6 +3,7 @@
 import socket
 import time
 import sys
+import requests
 
 HOST = str(sys.argv[1])
 PORT = int(sys.argv[2])
